@@ -1,8 +1,9 @@
 <template>
    <div class="h-100">
       <Header />
-      <main class="d-flex align-items-center">
-         <Main :artists="artists" />
+      <main class="d-flex align-items-center justify-content-center">
+         <div v-if="loader"><h1 class="text-white">CARICAMENTO</h1></div>
+         <Main v-else :artists="artists" />
       </main>
    </div>
 </template>
@@ -21,13 +22,16 @@ export default {
    },
    data() {
       return {
+         loader: true,
          artists: [],
       };
    },
    methods: {
       getArtists() {
+         this.loader = true;
          axios.get("https://flynn.boolean.careers/exercises/api/array/music").then((res) => {
             this.artists = res.data.response;
+            this.loader = false;
          });
       },
    },

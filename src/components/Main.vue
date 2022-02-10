@@ -1,5 +1,5 @@
 <template>
-   <div class="container">
+   <div v-if="artists.length" class="container">
       <div class="row g-3">
          <div v-for="artist in artists" :key="artist.author" class="card text-center">
             <div class="img-cont">
