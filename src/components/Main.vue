@@ -31,6 +31,12 @@ export default {
    background-color: #2e3a46;
    border: none;
    margin: 15px 15px;
+   transition: transform 0.5s;
+   cursor: pointer;
+
+   &:hover {
+      transform: scale(1.1);
+   }
 
    .img-cont {
       height: 60%;
