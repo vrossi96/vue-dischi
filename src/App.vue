@@ -1,7 +1,9 @@
 <template>
-   <div>
+   <div class="h-100">
       <Header />
-      <Main />
+      <main class="d-flex align-items-center">
+         <Main :artists="artists" />
+      </main>
    </div>
 </template>
 
@@ -37,4 +39,8 @@ export default {
 
 <style lang="scss">
 @import "./assets/scss/style.scss";
+
+main {
+   height: calc(100vh - 80px);
+}
 </style>
