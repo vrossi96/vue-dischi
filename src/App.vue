@@ -1,6 +1,6 @@
 <template>
    <div class="h-100">
-      <Header :generes-array="genre" />
+      <Header :generes-array="genre" @genre-search="getSelectedGenre" />
       <main class="d-flex align-items-center justify-content-center">
          <div v-if="loader"><h1 class="text-white">CARICAMENTO</h1></div>
          <Main v-else :artists="artists" />
@@ -25,6 +25,7 @@ export default {
          loader: true,
          artists: [],
          genre: [],
+         searchGenre: "",
       };
    },
    computed: {
@@ -48,6 +49,9 @@ export default {
                }
             });
          });
+      },
+      getSelectedGenre(term) {
+         this.searchGenre = term;
       },
    },
    mounted() {
