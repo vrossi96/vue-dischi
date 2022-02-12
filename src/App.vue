@@ -3,7 +3,7 @@
       <Header :generes-array="genre" @genre-search="getSelectedGenre" />
       <main class="d-flex align-items-center justify-content-center">
          <div v-if="loader"><h1 class="text-white">CARICAMENTO</h1></div>
-         <Main v-else :artists="artists" />
+         <Main v-else :artists="songsShowed" />
       </main>
    </div>
 </template>
@@ -31,6 +31,13 @@ export default {
    computed: {
       genreArray() {
          return this.genre;
+      },
+      songsShowed() {
+         return this.artists.filter((song) => {
+            if (!this.searchGenre) {
+               return true;
+            } else if (song.genre === this.searchGenre) return true;
+         });
       },
    },
    methods: {
