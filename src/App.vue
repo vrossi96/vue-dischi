@@ -1,6 +1,6 @@
 <template>
    <div class="h-100">
-      <Header />
+      <Header :generes-array="genre" />
       <main class="d-flex align-items-center justify-content-center">
          <div v-if="loader"><h1 class="text-white">CARICAMENTO</h1></div>
          <Main v-else :artists="artists" />
@@ -28,11 +28,9 @@ export default {
       };
    },
    computed: {
-      /* getGenre() {
-         return this.artists.map((artist) => {
-            return artist.genre;
-         });
-      }, */
+      genreArray() {
+         return this.genre;
+      },
    },
    methods: {
       getArtists() {
@@ -55,6 +53,7 @@ export default {
    mounted() {
       this.getArtists();
       this.getGenres();
+      console.log(this.genre);
    },
 };
 </script>

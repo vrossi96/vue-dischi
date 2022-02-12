@@ -1,13 +1,21 @@
 <template>
-   <header class="d-flex align-items-center">
+   <header class="d-flex align-items-center justify-content-between">
       <img class="d-block" src="../assets/img/spotify-logo.png" alt="Spotify Logo" />
+      <select name="genre" id="genre">
+         <option>Seleziona genere</option>
+         <option v-for="genre in generesArray" :key="genre" :value="genre">{{ genre }}</option>
+      </select>
    </header>
 </template>
 
 <script>
 export default {
    name: "Header",
-   props: {},
+   props: ["generesArray"],
+   data() {
+      return {};
+   },
+   mounted() {},
 };
 </script>
 
