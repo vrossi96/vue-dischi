@@ -24,7 +24,15 @@ export default {
       return {
          loader: true,
          artists: [],
+         genre: [],
       };
+   },
+   computed: {
+      /* getGenre() {
+         return this.artists.map((artist) => {
+            return artist.genre;
+         });
+      }, */
    },
    methods: {
       getArtists() {
@@ -34,9 +42,19 @@ export default {
             this.loader = false;
          });
       },
+      getGenres() {
+         axios.get("https://flynn.boolean.careers/exercises/api/array/music").then((res) => {
+            res.data.response.forEach((author) => {
+               if (!this.genre.includes(author.genre)) {
+                  this.genre.push(author.genre);
+               }
+            });
+         });
+      },
    },
    mounted() {
       this.getArtists();
+      this.getGenres();
    },
 };
 </script>
