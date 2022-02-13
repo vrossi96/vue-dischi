@@ -1,6 +1,6 @@
 <template>
    <div class="h-100">
-      <Header :generes-array="genre" @genre-search="getSelectedGenre" />
+      <Header :generes-array="genre" :authors-array="authors" @genre-search="getSelectedGenre" @author-search="getSelectedAuthor" />
       <main class="d-flex align-items-center justify-content-center">
          <div v-if="loader"><h1 class="text-white">CARICAMENTO</h1></div>
          <Main v-else :artists="songsShowed" />
@@ -25,7 +25,9 @@ export default {
          loader: true,
          artists: [],
          genre: [],
+         authors: [],
          searchGenre: "",
+         searchAuthor: "",
       };
    },
    computed: {
@@ -34,9 +36,21 @@ export default {
       },
       songsShowed() {
          return this.artists.filter((song) => {
-            if (!this.searchGenre) {
+            if (!this.searchGenre && !this.searchAuthor) {
                return true;
-            } else if (song.genre === this.searchGenre) return true;
+            } else if (!this.searchGenre && this.searchAuthor) {
+               if (song.author === this.searchAuthor) {
+                  return true;
+               }
+            } else if (this.searchGenre && !this.searchAuthor) {
+               if (song.genre === this.searchGenre) {
+                  return true;
+               }
+            } else {
+               if (song.genre === this.searchGenre && song.author === this.searchAuthor) {
+                  return true;
+               }
+            }
          });
       },
    },
@@ -51,6 +65,15 @@ export default {
       getGenres() {
          axios.get("https://flynn.boolean.careers/exercises/api/array/music").then((res) => {
             res.data.response.forEach((author) => {
+               if (!this.authors.includes(author.author)) {
+                  this.authors.push(author.author);
+               }
+            });
+         });
+      },
+      getAuthors() {
+         axios.get("https://flynn.boolean.careers/exercises/api/array/music").then((res) => {
+            res.data.response.forEach((author) => {
                if (!this.genre.includes(author.genre)) {
                   this.genre.push(author.genre);
                }
@@ -60,11 +83,14 @@ export default {
       getSelectedGenre(term) {
          this.searchGenre = term;
       },
+      getSelectedAuthor(term) {
+         this.searchAuthor = term;
+      },
    },
    mounted() {
       this.getArtists();
       this.getGenres();
-      console.log(this.genre);
+      this.getAuthors();
    },
 };
 </script>

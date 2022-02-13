@@ -1,20 +1,27 @@
 <template>
    <header class="d-flex align-items-center justify-content-between">
       <img class="d-block" src="../assets/img/spotify-logo.png" alt="Spotify Logo" />
-      <select name="genre" id="genre" v-model="genreValue" @input="$emit('genre-search', $event.target.value)">
-         <option value="">Seleziona genere</option>
-         <option v-for="genre in generesArray" :key="genre" :value="genre">{{ genre }}</option>
-      </select>
+      <div>
+         <select name="genre" id="genre" v-model="genreValue" @input="$emit('genre-search', $event.target.value)">
+            <option value="">Seleziona genere</option>
+            <option v-for="genre in generesArray" :key="genre" :value="genre">{{ genre }}</option>
+         </select>
+         <select name="author" id="author" v-model="authorValue" @input="$emit('author-search', $event.target.value)">
+            <option value="">Seleziona per autore</option>
+            <option v-for="author in authorsArray" :key="author" :value="author">{{ author }}</option>
+         </select>
+      </div>
    </header>
 </template>
 
 <script>
 export default {
    name: "Header",
-   props: ["generesArray"],
+   props: ["generesArray", "authorsArray"],
    data() {
       return {
          genreValue: "",
+         authorValue: "",
       };
    },
    mounted() {},
