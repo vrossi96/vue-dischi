@@ -1,6 +1,6 @@
 <template>
    <div class="container">
-      <div v-if="artists.length" class="row g-3">
+      <div v-if="artists.length" class="row g-3 justify-content-evenly">
          <div v-for="artist in artists" :key="artist.author" class="card text-center">
             <div class="img-cont">
                <img class="dsa img-fluid" :src="artist.poster" :alt="artist.author" />
