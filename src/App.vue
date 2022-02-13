@@ -62,20 +62,11 @@ export default {
             this.loader = false;
          });
       },
-      getGenres() {
+      getArrayFromApi(arrayName, key) {
          axios.get("https://flynn.boolean.careers/exercises/api/array/music").then((res) => {
-            res.data.response.forEach((author) => {
-               if (!this.authors.includes(author.author)) {
-                  this.authors.push(author.author);
-               }
-            });
-         });
-      },
-      getAuthors() {
-         axios.get("https://flynn.boolean.careers/exercises/api/array/music").then((res) => {
-            res.data.response.forEach((author) => {
-               if (!this.genre.includes(author.genre)) {
-                  this.genre.push(author.genre);
+            res.data.response.forEach((item) => {
+               if (!arrayName.includes(item[key])) {
+                  arrayName.push(item[key]);
                }
             });
          });
@@ -89,8 +80,8 @@ export default {
    },
    mounted() {
       this.getArtists();
-      this.getGenres();
-      this.getAuthors();
+      this.getArrayFromApi(this.genre, "genre");
+      this.getArrayFromApi(this.authors, "author");
    },
 };
 </script>
