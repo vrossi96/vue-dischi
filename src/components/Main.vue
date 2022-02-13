@@ -1,6 +1,6 @@
 <template>
-   <div v-if="artists.length" class="container">
-      <div class="row g-3">
+   <div class="container">
+      <div v-if="artists.length" class="row g-3">
          <div v-for="artist in artists" :key="artist.author" class="card text-center">
             <div class="img-cont">
                <img class="dsa img-fluid" :src="artist.poster" :alt="artist.author" />
@@ -14,13 +14,16 @@
             </div>
          </div>
       </div>
+      <div v-else>
+         <h1 class="text-white text-uppercase text-center">Nessun risultato per "{{ selectedAuthor }}" e "{{ selectedGenre }}"</h1>
+      </div>
    </div>
 </template>
 
 <script>
 export default {
    name: "Main",
-   props: ["artists"],
+   props: ["artists", "selectedAuthor", "selectedGenre"],
 };
 </script>
 

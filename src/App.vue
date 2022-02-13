@@ -3,7 +3,7 @@
       <Header :generes-array="genre" :authors-array="authors" @genre-search="getSelectedGenre" @author-search="getSelectedAuthor" />
       <main class="d-flex align-items-center justify-content-center">
          <div v-if="loader"><h1 class="text-white">CARICAMENTO</h1></div>
-         <Main v-else :artists="songsShowed" />
+         <Main v-else :artists="songsShowed" :selected-genre="searchGenre" :selected-author="searchAuthor" />
       </main>
    </div>
 </template>
